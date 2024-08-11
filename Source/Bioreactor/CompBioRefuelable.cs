@@ -65,10 +65,8 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 
     public override void CompTick()
     {
-        if (!Props.consumeFuelOnlyWhenUsed && (flickComp == null || flickComp.SwitchIsOn) && bioReactor is
-            {
-                InnerPawn: not null
-            })
+        if (!Props.consumeFuelOnlyWhenUsed && (flickComp == null || flickComp.SwitchIsOn) &&
+            bioReactor is { InnerPawn: not null })
         {
             ConsumeFuel(ConsumptionRatePerTick);
         }

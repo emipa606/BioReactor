@@ -103,10 +103,24 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         }
 
         state = ReactorState.StartFilling;
-        if (thing is Pawn pawn && pawn.RaceProps.Humanlike)
+        if (thing is not Pawn pawn || !pawn.RaceProps.Humanlike)
         {
-            pawn.needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef.LivingBattery);
+            return true;
         }
+
+        pawn.needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef.LivingBattery);
+        if (pawn.carryTracker?.CarriedThing != null)
+        {
+            pawn.carryTracker.TryDropCarriedThing(PositionHeld, ThingPlaceMode.Near, out _);
+        }
+
+        pawn.equipment?.DropAllEquipment(PositionHeld, false);
+        if (pawn.inventory != null && pawn.inventory.innerContainer.TotalStackCount > 0)
+        {
+            pawn.inventory.DropAllNearPawn(PositionHeld);
+        }
+
+        pawn.apparel?.DropAll(PositionHeld, false, false);
 
         return true;
     }
@@ -268,7 +282,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
         foreach (var p in Map.mapPawns.SpawnedPawnsInFaction(Faction))
         {
-            if (p.needs == null || p.needs.mood == null || p.needs.mood.thoughts == null)
+            if (p.needs?.mood?.thoughts == null)
             {
                 continue;
             }
@@ -367,6 +381,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
                 break;
             case ReactorState.HistolysisDone:
+                EjectContents();
                 break;
         }
     }

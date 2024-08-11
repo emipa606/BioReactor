@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.2 - Pawns should now drop all apparel and equipment when entering the pod. After Histolysis the pod also ejects the corpse.
+
+
 1.5.1 - Updated for 1.5
 Used DeepL to update translations for ChineseSimplified, French, German, Japanese
 

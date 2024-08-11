@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>7c815624-e85b-4e36-87d4-f7de7f0d5649</ID>
   <ModName>BioReactor (Continued)</ModName>
-  <Version>1.5.1</Version>
+  <Version>1.5.2</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,8 +12,4 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
-
-
-
-
 
