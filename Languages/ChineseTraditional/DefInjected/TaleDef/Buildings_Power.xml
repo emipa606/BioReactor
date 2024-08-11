@@ -1,8 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!-- 4X4 Size -->
-
   <PutIntoBioReactor.label>塞進生物電池</PutIntoBioReactor.label>
   <PutIntoBioReactor.rulePack.rulesStrings.0>tale_noun->[CARRIER_nameDef] putting [SLEEPER_nameDef] into BioReactor</PutIntoBioReactor.rulePack.rulesStrings.0>
   <PutIntoBioReactor.rulePack.rulesStrings.1>image->[CARRIER_nameFull] placing [SLEEPER_nameDef] inside a BioReactor [circumstance_group]</PutIntoBioReactor.rulePack.rulesStrings.1>
@@ -19,7 +17,6 @@
   <PutIntoBioReactor.rulePack.rulesStrings.12>desc_sentence->[SLEEPER_nameDef] is visibly wounded.</PutIntoBioReactor.rulePack.rulesStrings.12>
   <PutIntoBioReactor.rulePack.rulesStrings.13>desc_sentence->[SLEEPER_nameDef] looks exhausted.</PutIntoBioReactor.rulePack.rulesStrings.13>
   <PutIntoBioReactor.rulePack.rulesStrings.14>desc_sentence->[Quantity_adjphrase] filled BioReactor surround the scene.</PutIntoBioReactor.rulePack.rulesStrings.14>
-
   <EnteredBioReactor.label>進入生物電池</EnteredBioReactor.label>
   <EnteredBioReactor.rulePack.rulesStrings.0>tale_noun->[PAWN_nameDef] entering BioReactor</EnteredBioReactor.rulePack.rulesStrings.0>
   <EnteredBioReactor.rulePack.rulesStrings.1>image->[PAWN_nameFull] put in to BioReactor [circumstance_group]</EnteredBioReactor.rulePack.rulesStrings.1>
@@ -36,6 +33,4 @@
   <EnteredBioReactor.rulePack.rulesStrings.12>desc_sentence->[PAWN_nameDef] is visibly wounded.</EnteredBioReactor.rulePack.rulesStrings.12>
   <EnteredBioReactor.rulePack.rulesStrings.13>desc_sentence->A [Color] aurora shines in the background.</EnteredBioReactor.rulePack.rulesStrings.13>
   <EnteredBioReactor.rulePack.rulesStrings.14>desc_sentence->[Quantity_adjphrase] filled BioReactor surround the scene.</EnteredBioReactor.rulePack.rulesStrings.14>
-
-
 </LanguageData>
