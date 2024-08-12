@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.3 - Added support for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763]Vanilla Nutrient Paste Expanded[/url], based on the patch by KahirDragoon
+
+
 1.5.2 - Pawns should now drop all apparel and equipment when entering the pod. After Histolysis the pod also ejects the corpse.
 
 

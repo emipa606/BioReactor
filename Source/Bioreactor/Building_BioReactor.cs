@@ -384,6 +384,11 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                 EjectContents();
                 break;
         }
+
+        if (Building_BioReactor_VNPE.VNPELoaded)
+        {
+            Building_BioReactor_VNPE.VNPE_Check(this);
+        }
     }
 
     protected override void DrawAt(Vector3 drawLoc, bool flip = false)
