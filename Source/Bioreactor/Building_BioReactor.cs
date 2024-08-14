@@ -488,6 +488,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     public void DrawInnerThing(Pawn pawn, Vector3 rootLoc)
     {
+        pawn.Drawer.renderer.wiggler.downedAngle = 0;
         pawn.Drawer.renderer.RenderPawnAt(rootLoc, Rot4.South);
     }
 

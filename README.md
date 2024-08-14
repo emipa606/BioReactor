@@ -4,6 +4,8 @@
 
 Update of NukaFrogs mod https://steamcommunity.com/sharedfiles/filedetails/?id=1564657272
 
+- Added support for [Vanilla Nutrient Paste Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763), based on the [patch](https://steamcommunity.com/sharedfiles/filedetails/?id=2979624445) by KahirDragoon
+
 ![Image](https://i.imgur.com/pufA0kM.png)
 	
 ![Image](https://i.imgur.com/Z4GOv8H.png)

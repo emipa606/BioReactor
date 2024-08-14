@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.4 - Pawns should now stand in the bioreactors even if downed
+
+
 1.5.3 - Added support for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763]Vanilla Nutrient Paste Expanded[/url], based on the patch by KahirDragoon
 
 
