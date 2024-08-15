@@ -114,13 +114,21 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             pawn.carryTracker.TryDropCarriedThing(PositionHeld, ThingPlaceMode.Near, out _);
         }
 
-        pawn.equipment?.DropAllEquipment(PositionHeld, false);
-        if (pawn.inventory != null && pawn.inventory.innerContainer.TotalStackCount > 0)
+        if (BioReactorMod.instance.Settings.Carried)
+        {
+            pawn.equipment?.DropAllEquipment(PositionHeld, false);
+        }
+
+        if (BioReactorMod.instance.Settings.Apparel)
+        {
+            pawn.apparel?.DropAll(PositionHeld, false, false);
+        }
+
+        if (BioReactorMod.instance.Settings.Inventory && pawn.inventory != null &&
+            pawn.inventory.innerContainer.TotalStackCount > 0)
         {
             pawn.inventory.DropAllNearPawn(PositionHeld);
         }
-
-        pawn.apparel?.DropAll(PositionHeld, false, false);
 
         return true;
     }

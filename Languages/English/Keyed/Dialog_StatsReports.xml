@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <BR.ModVersion>Installed mod-version: {0}</BR.ModVersion>
+  <BR.SelectItems>What should be dropped when a pawn enters a reactor</BR.SelectItems>
+  <BR.Carried>Carried weapon</BR.Carried>
+  <BR.Apparel>Worn apparel</BR.Apparel>
+  <BR.Inventory>Inventory</BR.Inventory>
   <EnterBioReactor>Enter BioReactor</EnterBioReactor>
   <Histolysis>Histolysis</Histolysis>
   <HistolysisDesc>The living objects are melted in the reactor and replaced to biofuel.</HistolysisDesc>

@@ -12,4 +12,9 @@
   <CommandCopyBioReactorSettingsDesc>将此 BioReactor 的设置复制到剪贴板，以便粘贴到另一个 BioReactor 上。</CommandCopyBioReactorSettingsDesc>
   <CommandPasteBioReactorSettingsLabel>粘贴设置</CommandPasteBioReactorSettingsLabel>
   <CommandPasteBioReactorSettingsDesc>用之前复制到剪贴板的设置覆盖此 BioReactor 的设置。</CommandPasteBioReactorSettingsDesc>
+  <BR.ModVersion>已安装模块版本：{0}</BR.ModVersion>
+  <BR.SelectItems>棋子进入反应堆时应丢弃什么？</BR.SelectItems>
+  <BR.Carried>携带武器</BR.Carried>
+  <BR.Apparel>穿过的服装</BR.Apparel>
+  <BR.Inventory>库存</BR.Inventory>
 </LanguageData>

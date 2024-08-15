@@ -1,5 +1,9 @@
 # Changelog for BioReactor
 
+1.5.5 - Added mod-settings for selecting what is dropped when a pawn enters a reactor
+Used DeepL to update translations for ChineseSimplified, French, German, Japanese
+
+
 1.5.4 - Pawns should now stand in the bioreactors even if downed
 
 

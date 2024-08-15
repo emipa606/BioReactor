@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <EnterBioReactor>Enter BioReactor casket</EnterBioReactor>
   <Histolysis>Histolysis</Histolysis>
@@ -12,4 +12,9 @@
   <CommandCopyBioReactorSettingsDesc>このBioReactorの設定をクリップボードにコピーし、別のBioReactorに貼り付けることができます。</CommandCopyBioReactorSettingsDesc>
   <CommandPasteBioReactorSettingsLabel>貼り付け設定</CommandPasteBioReactorSettingsLabel>
   <CommandPasteBioReactorSettingsDesc>このBioReactorの設定をクリップボードにコピーした設定に上書きします。</CommandPasteBioReactorSettingsDesc>
+  <BR.ModVersion>インストールされたMODのバージョン：{0}</BR.ModVersion>
+  <BR.SelectItems>ポーンが原子炉に入ったときに落とすべきもの</BR.SelectItems>
+  <BR.Carried>携行武器</BR.Carried>
+  <BR.Apparel>着用アパレル</BR.Apparel>
+  <BR.Inventory>インベントリー</BR.Inventory>
 </LanguageData>
