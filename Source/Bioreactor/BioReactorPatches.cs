@@ -13,6 +13,7 @@ public static class BioReactorPatches
 {
     private static readonly Type patchType = typeof(BioReactorPatches);
 
+    public static readonly Texture2D PawnInfoTexture = ContentFinder<Texture2D>.Get("UI/Commands/ViewQuest");
 
     static BioReactorPatches()
     {

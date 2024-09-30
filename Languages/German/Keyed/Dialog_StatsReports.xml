@@ -17,4 +17,6 @@
   <BR.Carried>Getragene Waffe</BR.Carried>
   <BR.Apparel>Getragene Kleidungsstücke</BR.Apparel>
   <BR.Inventory>Bestandsaufnahme</BR.Inventory>
+  <BR.ShowPawnInfo>Pfand Info</BR.ShowPawnInfo>
+  <BR.ShowPawnInfoDesc>Infotafel für die enthaltene Spielfigur anzeigen</BR.ShowPawnInfoDesc>
 </LanguageData>

@@ -2,6 +2,8 @@
 <LanguageData>
   <BR.ModVersion>Installed mod-version: {0}</BR.ModVersion>
   <BR.SelectItems>What should be dropped when a pawn enters a reactor</BR.SelectItems>
+  <BR.ShowPawnInfo>Pawn Info</BR.ShowPawnInfo>
+  <BR.ShowPawnInfoDesc>Show info panel for the contained pawn</BR.ShowPawnInfoDesc>
   <BR.Carried>Carried weapon</BR.Carried>
   <BR.Apparel>Worn apparel</BR.Apparel>
   <BR.Inventory>Inventory</BR.Inventory>

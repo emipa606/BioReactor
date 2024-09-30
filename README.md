@@ -5,6 +5,7 @@
 Update of NukaFrogs mod https://steamcommunity.com/sharedfiles/filedetails/?id=1564657272
 
 - Added support for [Vanilla Nutrient Paste Expanded](https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763), based on the [patch](https://steamcommunity.com/sharedfiles/filedetails/?id=2979624445) by KahirDragoon
+- Added mod-settings for selecting what is dropped when a pawn enters a reactor
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 	

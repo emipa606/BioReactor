@@ -27,6 +27,7 @@
 Update of NukaFrogs mod https://steamcommunity.com/sharedfiles/filedetails/?id=1564657272
 
 - Added support for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763]Vanilla Nutrient Paste Expanded[/url], based on the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2979624445]patch[/url] by KahirDragoon
+- Added mod-settings for selecting what is dropped when a pawn enters a reactor
 
 [img]https://i.imgur.com/pufA0kM.png[/img]
 
@@ -93,5 +94,5 @@ WorkGiver optimization.
 [/list]
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3307031939][img]https://img.shields.io/github/v/release/emipa606/BioReactor?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url]</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.5</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.6</modVersion>
 </ModMetaData>

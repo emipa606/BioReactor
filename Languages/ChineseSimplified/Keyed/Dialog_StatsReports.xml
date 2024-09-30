@@ -17,4 +17,6 @@
   <BR.Carried>携带武器</BR.Carried>
   <BR.Apparel>穿过的服装</BR.Apparel>
   <BR.Inventory>库存</BR.Inventory>
+  <BR.ShowPawnInfo>典当信息</BR.ShowPawnInfo>
+  <BR.ShowPawnInfoDesc>显示所含棋子的信息面板</BR.ShowPawnInfoDesc>
 </LanguageData>

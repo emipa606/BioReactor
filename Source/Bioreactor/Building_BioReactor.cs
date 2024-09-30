@@ -193,6 +193,18 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                     };
                 }
             }
+
+            yield return new Command_Action
+            {
+                defaultLabel = "BR.ShowPawnInfo".Translate(),
+                defaultDesc = "BR.ShowPawnInfoDesc".Translate(),
+                icon = BioReactorPatches.PawnInfoTexture,
+                action = delegate
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(pawn);
+                }
+            };
         }
 
         foreach (var gizmo2 in CopyPasteGizmosFor(compRefuelable.inputSettings))

@@ -17,4 +17,6 @@
   <BR.Carried>携行武器</BR.Carried>
   <BR.Apparel>着用アパレル</BR.Apparel>
   <BR.Inventory>インベントリー</BR.Inventory>
+  <BR.ShowPawnInfo>質情報</BR.ShowPawnInfo>
+  <BR.ShowPawnInfoDesc>ポーンの情報パネルを表示する</BR.ShowPawnInfoDesc>
 </LanguageData>

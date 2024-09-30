@@ -17,4 +17,6 @@
   <BR.Carried>Arme portée</BR.Carried>
   <BR.Apparel>Vêtements portés</BR.Apparel>
   <BR.Inventory>Inventaire</BR.Inventory>
+  <BR.ShowPawnInfo>Informations sur les prêteurs sur gages</BR.ShowPawnInfo>
+  <BR.ShowPawnInfoDesc>Afficher le panneau d'information pour le pion contenu</BR.ShowPawnInfoDesc>
 </LanguageData>
