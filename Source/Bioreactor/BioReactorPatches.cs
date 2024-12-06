@@ -29,12 +29,24 @@ public static class BioReactorPatches
             return true;
         }
 
-        foreach (var localTargetInfo3 in GenUI.TargetsAt(clickPos, TargetingParameters.ForRescue(pawn), true))
+        foreach (var localTargetInfo3 in GenUI.TargetsAt(clickPos,
+                     JobDriver_CarryToBioReactor.ForCarryToBioReactor(pawn), true))
         {
             var localTargetInfo4 = localTargetInfo3;
             var victim = (Pawn)localTargetInfo4.Thing;
-            if (!victim.Downed ||
-                !pawn.CanReserveAndReach(victim, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, true) ||
+
+
+            if (victim.Faction != Faction.OfPlayer && !victim.Downed)
+            {
+                continue;
+            }
+
+            if (victim.InAggroMentalState)
+            {
+                continue;
+            }
+
+            if (!pawn.CanReserveAndReach(victim, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, true) ||
                 Building_BioReactor.FindBioReactorFor(victim, pawn, true) == null)
             {
                 continue;

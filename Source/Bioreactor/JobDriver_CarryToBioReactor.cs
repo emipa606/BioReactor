@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -45,7 +46,6 @@ public class JobDriver_CarryToBioReactor : JobDriver
                 TakeeInd, PathEndMode.OnCell).FailOnDestroyedNullOrForbidden(TakeeInd)
             .FailOnDespawnedNullOrForbidden(DropPodInd).FailOn(() =>
                 DropPod.GetDirectlyHeldThings().Count > 0).FailOn(() =>
-                !Takee.Downed).FailOn(() =>
                 !pawn.CanReach(Takee, PathEndMode.OnCell, Danger.Deadly))
             .FailOnSomeonePhysicallyInteracting(TakeeInd);
         yield return Toils_Haul.StartCarryThing(TakeeInd);
@@ -68,5 +68,19 @@ public class JobDriver_CarryToBioReactor : JobDriver
             pawn,
             Takee
         ];
+    }
+
+    public static TargetingParameters ForCarryToBioReactor(Pawn p)
+    {
+        return new TargetingParameters
+        {
+            canTargetPawns = true,
+            canTargetMechs = false,
+            canTargetBuildings = false,
+            onlyTargetIncapacitatedPawns = false,
+            canTargetAnimals = true,
+            canTargetMutants = true,
+            canTargetSelf = false
+        };
     }
 }
