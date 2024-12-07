@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.8 - You can now also carry prisoners of the colony to the reactor without downing them
+
+
 1.5.7 - It is now possible to carry any pawn of the player faction to the pod without the need for them being downed. Non-player faction pawns still need to be downed.
 
 

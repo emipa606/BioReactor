@@ -36,7 +36,7 @@ public static class BioReactorPatches
             var victim = (Pawn)localTargetInfo4.Thing;
 
 
-            if (victim.Faction != Faction.OfPlayer && !victim.Downed)
+            if (victim.Faction != Faction.OfPlayer && !victim.IsPrisonerOfColony && !victim.Downed)
             {
                 continue;
             }
