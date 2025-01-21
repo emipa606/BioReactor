@@ -17,8 +17,7 @@
     </statBases>
     <tickerType>Normal</tickerType>
     <designationCategory>Power</designationCategory>
-    <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,2)</interactionCellOffset>
+    <hasInteractionCell>false</hasInteractionCell>
     <defaultPlacingRot>South</defaultPlacingRot>
     <inspectorTabs>
       <li>BioReactor.ITab_CustomRefuel</li>
@@ -231,7 +230,6 @@
       <Steel>360</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
-    <interactionCellOffset>(0,0,3)</interactionCellOffset>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>BioReactor.CompBioPowerPlant</compClass>
@@ -367,7 +365,6 @@
       <Steel>360</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
-    <interactionCellOffset>(0,0,3)</interactionCellOffset>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>BioReactor.CompBioPowerPlant</compClass>
