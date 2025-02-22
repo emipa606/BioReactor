@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.10 - Pawns can not carry themselves to the reactor
+
+
 1.5.9 - Removed the interraction spot for easier placement
 
 
