@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.11 - Should no longer be possible to put pawns in vehicles in bioreactors
+
+
 1.5.10 - Pawns can not carry themselves to the reactor
 
 

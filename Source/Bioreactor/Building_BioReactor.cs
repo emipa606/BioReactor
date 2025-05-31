@@ -22,7 +22,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         HistolysisDone //Just Drawing
     }
 
-    private static readonly StorageSettings clipboard = new StorageSettings();
+    private static readonly StorageSettings clipboard = new();
 
     public CompBioRefuelable compRefuelable;
     public float fillpct;

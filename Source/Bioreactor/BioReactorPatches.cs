@@ -56,6 +56,11 @@ public static class BioReactorPatches
                 continue;
             }
 
+            if (!victim.health.beCarriedByCaravanIfSick)
+            {
+                continue;
+            }
+
             string text4 =
                 "CarryToBioReactor".Translate(localTargetInfo4.Thing.LabelCap, localTargetInfo4.Thing);
             var jDef = Bio_JobDefOf.CarryToBioReactor;
@@ -67,11 +72,8 @@ public static class BioReactorPatches
 
             void Action()
             {
-                var building_BioReactor = Building_BioReactor.FindBioReactorFor(victim, pawn);
-                if (building_BioReactor == null)
-                {
-                    building_BioReactor = Building_BioReactor.FindBioReactorFor(victim, pawn, true);
-                }
+                var building_BioReactor = Building_BioReactor.FindBioReactorFor(victim, pawn) ??
+                                          Building_BioReactor.FindBioReactorFor(victim, pawn, true);
 
                 if (building_BioReactor == null)
                 {
