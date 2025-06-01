@@ -56,7 +56,7 @@ public static class BioReactorPatches
                 continue;
             }
 
-            if (!victim.health.beCarriedByCaravanIfSick)
+            if (victim.def.thingClass.Name.EndsWith("VehiclePawn"))
             {
                 continue;
             }

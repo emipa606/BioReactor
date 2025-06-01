@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.5.12 - Better vehicle check
+
+
 1.5.11 - Should no longer be possible to put pawns in vehicles in bioreactors
 
 
