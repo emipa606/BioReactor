@@ -1,95 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using HarmonyLib;
-using RimWorld;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace BioReactor;
 
 [StaticConstructorOnStartup]
 public static class BioReactorPatches
 {
-    private static readonly Type patchType = typeof(BioReactorPatches);
-
     public static readonly Texture2D PawnInfoTexture = ContentFinder<Texture2D>.Get("UI/Commands/ViewQuest");
-
-    static BioReactorPatches()
-    {
-        var harmonyInstance = new Harmony("com.BioReactor.rimworld.mod");
-        harmonyInstance.Patch(AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders"),
-            new HarmonyMethod(patchType, nameof(Prefix_AddHumanlikeOrders)));
-    }
-
-    public static bool Prefix_AddHumanlikeOrders(Vector3 clickPos, Pawn pawn, List<FloatMenuOption> opts)
-    {
-        if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
-        {
-            return true;
-        }
-
-        foreach (var localTargetInfo3 in GenUI.TargetsAt(clickPos,
-                     JobDriver_CarryToBioReactor.ForCarryToBioReactor(pawn), true))
-        {
-            var localTargetInfo4 = localTargetInfo3;
-            var victim = (Pawn)localTargetInfo4.Thing;
-
-            if (victim == pawn)
-            {
-                continue;
-            }
-
-            if (victim.Faction != Faction.OfPlayer && !victim.IsPrisonerOfColony && !victim.Downed)
-            {
-                continue;
-            }
-
-            if (victim.InAggroMentalState)
-            {
-                continue;
-            }
-
-            if (!pawn.CanReserveAndReach(victim, PathEndMode.OnCell, Danger.Deadly, 1, -1, null, true) ||
-                Building_BioReactor.FindBioReactorFor(victim, pawn, true) == null)
-            {
-                continue;
-            }
-
-            if (victim.def.thingClass.Name.EndsWith("VehiclePawn"))
-            {
-                continue;
-            }
-
-            string text4 =
-                "CarryToBioReactor".Translate(localTargetInfo4.Thing.LabelCap, localTargetInfo4.Thing);
-            var jDef = Bio_JobDefOf.CarryToBioReactor;
-
-            opts.Add(FloatMenuUtility.DecoratePrioritizedTask(
-                new FloatMenuOption(text4, Action, MenuOptionPriority.Default, null, victim),
-                pawn, victim));
-            continue;
-
-            void Action()
-            {
-                var building_BioReactor = Building_BioReactor.FindBioReactorFor(victim, pawn) ??
-                                          Building_BioReactor.FindBioReactorFor(victim, pawn, true);
-
-                if (building_BioReactor == null)
-                {
-                    Messages.Message("CannotCarryToBioReactor".Translate() + ": " + "NoBioReactor".Translate(), victim,
-                        MessageTypeDefOf.RejectInput, false);
-                    return;
-                }
-
-                var job = new Job(jDef, victim, building_BioReactor)
-                {
-                    count = 1
-                };
-                pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-            }
-        }
-
-        return true;
-    }
 }

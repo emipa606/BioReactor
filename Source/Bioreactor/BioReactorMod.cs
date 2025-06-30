@@ -10,7 +10,7 @@ internal class BioReactorMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static BioReactorMod instance;
+    public static BioReactorMod Instance;
 
     private static string currentVersion;
 
@@ -20,7 +20,7 @@ internal class BioReactorMod : Mod
     /// <param name="content"></param>
     public BioReactorMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         Settings = GetSettings<BioReactorSettings>();
         currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
@@ -46,20 +46,20 @@ internal class BioReactorMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.Label("BR.SelectItems".Translate());
-        listing_Standard.CheckboxLabeled("BR.Carried".Translate(), ref Settings.Carried);
-        listing_Standard.CheckboxLabeled("BR.Apparel".Translate(), ref Settings.Apparel);
-        listing_Standard.CheckboxLabeled("BR.Inventory".Translate(), ref Settings.Inventory);
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.Label("BR.SelectItems".Translate());
+        listingStandard.CheckboxLabeled("BR.Carried".Translate(), ref Settings.Carried);
+        listingStandard.CheckboxLabeled("BR.Apparel".Translate(), ref Settings.Apparel);
+        listingStandard.CheckboxLabeled("BR.Inventory".Translate(), ref Settings.Inventory);
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("BR.ModVersion".Translate(currentVersion));
+            listingStandard.Label("BR.ModVersion".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 }

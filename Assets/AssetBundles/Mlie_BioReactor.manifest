@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 1620897258
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bfa934ca1c8d380143138d18e1b0a4c1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ce3b6d18a872ca8039cd5eb3c4fb7ef5
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: bfa934ca1c8d380143138d18e1b0a4c1
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Data/Mlie.BioReactor/Textures/UI/Commands/Histolysis.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/cell2.png
+- Assets/Data/Mlie.BioReactor/Sounds/Things/Drowning.wav
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/bigcell4.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_CircleType_Full.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_CircleType.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/bigcell3.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_SquareType.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_CircleType_Floor.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_SquareType_Full.png
+- Assets/Data/Mlie.BioReactor/Textures/Things/Building/BioReactor_SquareType_Floor.png
+Dependencies: []

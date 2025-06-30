@@ -24,19 +24,19 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     private static readonly StorageSettings clipboard = new();
 
-    public CompBioRefuelable compRefuelable;
-    public float fillpct;
-    public CompForbiddable forbiddable;
-    public float histolysisPct;
+    private CompBioRefuelable compRefuelable;
+    private float fillpct;
+    private CompForbiddable forbiddable;
+    private float histolysisPct;
 
     /// <summary>
     ///     내부 캐릭터 드로우 좌표. 리액터 실좌표 중심으로 드로우.
     /// </summary>
-    public Vector3 innerDrawOffset;
+    private Vector3 innerDrawOffset;
 
     public ReactorState state = ReactorState.Empty;
-    public Vector3 waterDrawCenter;
-    public Vector2 waterDrawSize;
+    private Vector3 waterDrawCenter;
+    private Vector2 waterDrawSize;
 
     public bool IsContainingThingPawn
     {
@@ -69,7 +69,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         }
     }
 
-    public static bool HasCopiedSettings { get; private set; }
+    private static bool HasCopiedSettings { get; set; }
 
     bool ISuspendableThingHolder.IsContentsSuspended => true;
 
@@ -114,17 +114,17 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             pawn.carryTracker.TryDropCarriedThing(PositionHeld, ThingPlaceMode.Near, out _);
         }
 
-        if (BioReactorMod.instance.Settings.Carried)
+        if (BioReactorMod.Instance.Settings.Carried)
         {
             pawn.equipment?.DropAllEquipment(PositionHeld, false);
         }
 
-        if (BioReactorMod.instance.Settings.Apparel)
+        if (BioReactorMod.Instance.Settings.Apparel)
         {
             pawn.apparel?.DropAll(PositionHeld, false, false);
         }
 
-        if (BioReactorMod.instance.Settings.Inventory && pawn.inventory != null &&
+        if (BioReactorMod.Instance.Settings.Inventory && pawn.inventory != null &&
             pawn.inventory.innerContainer.TotalStackCount > 0)
         {
             pawn.inventory.DropAllNearPawn(PositionHeld);
@@ -260,7 +260,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         forbiddable = GetComp<CompForbiddable>();
     }
 
-    public void Histolysis()
+    private void Histolysis()
     {
         if (!HasAnyContents)
         {
@@ -315,7 +315,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         }
     }
 
-    public void MakeFuel()
+    private void MakeFuel()
     {
         var stuff = GenStuff.RandomStuffFor(ThingDefOf.Chemfuel);
         var thing = ThingMaker.MakeThing(ThingDefOf.Chemfuel, stuff);
@@ -363,7 +363,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         return null;
     }
 
-    public override void Tick()
+    protected override void Tick()
     {
         base.Tick();
         switch (state)
@@ -491,7 +491,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             Graphic.MatSingle);
     }
 
-    public void LiquidDraw(Color color, float fillPct)
+    private void LiquidDraw(Color color, float fillPct)
     {
         var r = default(GenDraw.FillableBarRequest);
         r.center = DrawPos + waterDrawCenter;
@@ -506,13 +506,13 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         GenDraw.DrawFillableBar(r);
     }
 
-    public void DrawInnerThing(Pawn pawn, Vector3 rootLoc)
+    private void DrawInnerThing(Pawn pawn, Vector3 rootLoc)
     {
         pawn.Drawer.renderer.wiggler.downedAngle = 0;
         pawn.Drawer.renderer.RenderPawnAt(rootLoc, Rot4.South);
     }
 
-    public static IEnumerable<Gizmo> CopyPasteGizmosFor(StorageSettings s)
+    private static IEnumerable<Gizmo> CopyPasteGizmosFor(StorageSettings s)
     {
         yield return new Command_Action
         {
@@ -546,13 +546,13 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         yield return command_Action;
     }
 
-    public static void Copy(StorageSettings s)
+    private static void Copy(StorageSettings s)
     {
         clipboard.CopyFrom(s);
         HasCopiedSettings = true;
     }
 
-    public static void PasteInto(StorageSettings s)
+    private static void PasteInto(StorageSettings s)
     {
         s.CopyFrom(clipboard);
     }

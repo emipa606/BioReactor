@@ -8,9 +8,9 @@ public class ITab_CustomRefuel : ITab
 {
     private const float TopAreaHeight = 40f;
 
-    private static readonly Vector2 WinSize = new Vector2(300f, 480f);
+    private static readonly Vector2 WinSize = new(300f, 480f);
 
-    private readonly ThingFilterUI.UIState thingFilterState = new ThingFilterUI.UIState();
+    private readonly ThingFilterUI.UIState thingFilterState = new();
 
     public ITab_CustomRefuel()
     {

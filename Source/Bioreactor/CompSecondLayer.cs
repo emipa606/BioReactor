@@ -7,9 +7,9 @@ namespace BioReactor;
 internal sealed class CompSecondLayer : ThingComp
 {
     private Graphic graphicInt;
-    public Vector3 offset;
+    private Vector3 offset;
 
-    public Graphic Graphic
+    private Graphic Graphic
     {
         get
         {
@@ -33,7 +33,7 @@ internal sealed class CompSecondLayer : ThingComp
         }
     }
 
-    public CompProperties_SecondLayer Props => (CompProperties_SecondLayer)props;
+    private CompProperties_SecondLayer Props => (CompProperties_SecondLayer)props;
 
     public override void PostDraw()
     {

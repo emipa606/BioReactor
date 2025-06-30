@@ -49,9 +49,9 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
         component?.comps.Add(this);
     }
 
-    public override void PostDeSpawn(Map map)
+    public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
     {
-        base.PostDeSpawn(map);
+        base.PostDeSpawn(map, mode);
         var component = map.GetComponent<CompMapRefuelable>();
 
         component?.comps.Remove(this);

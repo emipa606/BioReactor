@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: We melted human alive. -->
+  <KnowHistolysisHumanlike.stages.We_melted_human_alive.label>We melted human alive.</KnowHistolysisHumanlike.stages.We_melted_human_alive.label>
+  <!-- EN: A living person melted alive.Just melted i...urp.. -->
+  <KnowHistolysisHumanlike.stages.We_melted_human_alive.description>A living person melted alive.Just melted i...urp..</KnowHistolysisHumanlike.stages.We_melted_human_alive.description>
+  <!-- EN: Disgusting -->
+  <KnowHistolysisHumanlikeCannibal.stages.Disgusting.label>Disgusting</KnowHistolysisHumanlikeCannibal.stages.Disgusting.label>
+  <!-- EN: Seriously, It's killing my appetite. -->
+  <KnowHistolysisHumanlikeCannibal.stages.Disgusting.description>Seriously, It's killing my appetite.</KnowHistolysisHumanlikeCannibal.stages.Disgusting.description>
+  <!-- EN: I saw people melting. -->
+  <KnowHistolysisHumanlikePsychopath.stages.I_saw_people_melting.label>I saw people melting.</KnowHistolysisHumanlikePsychopath.stages.I_saw_people_melting.label>
+  <!-- EN: I saw it go back to the beginning... Beautiful. -->
+  <KnowHistolysisHumanlikePsychopath.stages.I_saw_people_melting.description>I saw it go back to the beginning... Beautiful.</KnowHistolysisHumanlikePsychopath.stages.I_saw_people_melting.description>
+  <!-- EN: I became Living battery. -->
+  <LivingBattery.stages.I_became_Living_battery.label>I became Living battery.</LivingBattery.stages.I_became_Living_battery.label>
+  <!-- EN: I became living battery alive. I Don't want to go back there. -->
+  <LivingBattery.stages.I_became_Living_battery.description>I became living battery alive. I Don't want to go back there.</LivingBattery.stages.I_became_Living_battery.description>
+</LanguageData>

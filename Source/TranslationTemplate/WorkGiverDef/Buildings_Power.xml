@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: refuel fuelable buildings -->
+  <CustomWorkRefuel.label>refuel fuelable buildings</CustomWorkRefuel.label>
+  <!-- EN: refueling -->
+  <CustomWorkRefuel.gerund>refueling</CustomWorkRefuel.gerund>
+  <!-- EN: refuel -->
+  <CustomWorkRefuel.verb>refuel</CustomWorkRefuel.verb>
+</LanguageData>

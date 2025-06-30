@@ -11,9 +11,9 @@ public class JobDriver_CarryToBioReactor : JobDriver
 
     private const TargetIndex DropPodInd = TargetIndex.B;
 
-    protected Pawn Takee => (Pawn)job.GetTarget(TakeeInd).Thing;
+    private Pawn Takee => (Pawn)job.GetTarget(TakeeInd).Thing;
 
-    protected Building_BioReactor DropPod => job.GetTarget(DropPodInd).Thing as Building_BioReactor;
+    private Building_BioReactor DropPod => job.GetTarget(DropPodInd).Thing as Building_BioReactor;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
@@ -79,7 +79,7 @@ public class JobDriver_CarryToBioReactor : JobDriver
             canTargetBuildings = false,
             onlyTargetIncapacitatedPawns = false,
             canTargetAnimals = true,
-            canTargetMutants = true,
+            canTargetSubhumans = true,
             canTargetSelf = false
         };
     }

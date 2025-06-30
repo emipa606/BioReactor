@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: carrying TargetA to BioReactor. -->
+  <CarryToBioReactor.reportString>carrying TargetA to BioReactor.</CarryToBioReactor.reportString>
+  <!-- EN: entering BioReactor. -->
+  <EnterBioReactor.reportString>entering BioReactor.</EnterBioReactor.reportString>
+</LanguageData>

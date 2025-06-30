@@ -5,7 +5,7 @@ namespace BioReactor;
 
 public class CompBioPowerPlant : CompPowerPlant
 {
-    public Building_BioReactor building_BioReactor;
+    private Building_BioReactor building_BioReactor;
     public CompRefuelable compRefuelable;
 
     protected override float DesiredPowerOutput => -Props.PowerConsumption;
@@ -23,7 +23,7 @@ public class CompBioPowerPlant : CompPowerPlant
         UpdateDesiredPowerOutput();
     }
 
-    public new void UpdateDesiredPowerOutput()
+    public override void UpdateDesiredPowerOutput()
     {
         if (building_BioReactor != null && building_BioReactor.state != Building_BioReactor.ReactorState.Full ||
             breakdownableComp is { BrokenDown: true } ||
