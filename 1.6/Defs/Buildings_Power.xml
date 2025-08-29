@@ -12,6 +12,7 @@
     <blockWind>true</blockWind>
     <fillPercent>0.8</fillPercent>
     <canOverlapZones>false</canOverlapZones>
+    <rotatable>false</rotatable>
     <statBases>
       <Flammability>0.2</Flammability>
     </statBases>
@@ -63,7 +64,6 @@
       <li>BiofuelRefining</li>
     </researchPrerequisites>
     <destroyable>true</destroyable>
-    <rotatable>false</rotatable>
   </ThingDef>
   <ThingDef Class="BioReactor.BioReactorDef" Name="BioReactorCircleBase" ParentName="BioReactorBase" Abstract="True">
     <designatorDropdown>BioReactor_CircleType</designatorDropdown>

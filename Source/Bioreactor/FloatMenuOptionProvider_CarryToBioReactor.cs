@@ -43,6 +43,22 @@ public class FloatMenuOptionProvider_CarryToBioReactor : FloatMenuOptionProvider
 
     protected override FloatMenuOption GetSingleOptionFor(Pawn clickedPawn, FloatMenuContext context)
     {
+        var buildingBioReactor =
+            Building_BioReactor.FindBioReactorFor(clickedPawn, context.FirstSelectedPawn, out var reactorExists) ??
+            Building_BioReactor.FindBioReactorFor(clickedPawn, context.FirstSelectedPawn, out reactorExists, true);
+
+        if (buildingBioReactor == null)
+        {
+            if (!reactorExists)
+            {
+                return null;
+            }
+
+            return new FloatMenuOption(
+                "TheyCannotCarryToBioReactor".Translate(context.FirstSelectedPawn) + ": " +
+                "NoBioReactor".Translate().CapitalizeFirst(), null);
+        }
+
         if (!context.FirstSelectedPawn.CanReach(clickedPawn, PathEndMode.ClosestTouch, Danger.Deadly))
         {
             return new FloatMenuOption(
@@ -56,16 +72,6 @@ public class FloatMenuOptionProvider_CarryToBioReactor : FloatMenuOptionProvider
                 "TheyCannotCarryToBioReactor".Translate(context.FirstSelectedPawn) + ": " +
                 "Incapable".Translate().CapitalizeFirst(),
                 null);
-        }
-
-        var buildingBioReactor = Building_BioReactor.FindBioReactorFor(clickedPawn, context.FirstSelectedPawn) ??
-                                 Building_BioReactor.FindBioReactorFor(clickedPawn, context.FirstSelectedPawn, true);
-
-        if (buildingBioReactor == null)
-        {
-            return new FloatMenuOption(
-                "TheyCannotCarryToBioReactor".Translate(context.FirstSelectedPawn) + ": " +
-                "NoBioReactor".Translate().CapitalizeFirst(), null);
         }
 
         return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(

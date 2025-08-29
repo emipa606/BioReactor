@@ -19,4 +19,8 @@
   <BR.Inventory>インベントリー</BR.Inventory>
   <BR.ShowPawnInfo>質情報</BR.ShowPawnInfo>
   <BR.ShowPawnInfoDesc>ポーンの情報パネルを表示する</BR.ShowPawnInfoDesc>
+  <NoBioReactor>有効なBioReactorはありません</NoBioReactor>
+  <CarryToBioReactorNew>0}をBioReactorに運ぶ</CarryToBioReactorNew>
+  <CannotCarryThemToBioReactor>BioReactorに{0}を持ち込めません。</CannotCarryThemToBioReactor>
+  <TheyCannotCarryToBioReactor>{0}はBioReactorに持ち込めません。</TheyCannotCarryToBioReactor>
 </LanguageData>

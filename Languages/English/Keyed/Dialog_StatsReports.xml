@@ -7,6 +7,7 @@
   <BR.Carried>Carried weapon</BR.Carried>
   <BR.Apparel>Worn apparel</BR.Apparel>
   <BR.Inventory>Inventory</BR.Inventory>
+  <NoBioReactor>No valid BioReactor</NoBioReactor>
   <EnterBioReactor>Enter BioReactor</EnterBioReactor>
   <Histolysis>Histolysis</Histolysis>
   <HistolysisDesc>The living objects are melted in the reactor and replaced to biofuel.</HistolysisDesc>

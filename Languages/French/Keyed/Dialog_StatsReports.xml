@@ -19,4 +19,8 @@
   <BR.Inventory>Inventaire</BR.Inventory>
   <BR.ShowPawnInfo>Informations sur les prêteurs sur gages</BR.ShowPawnInfo>
   <BR.ShowPawnInfoDesc>Afficher le panneau d'information pour le pion contenu</BR.ShowPawnInfoDesc>
+  <NoBioReactor>Pas de BioReactor valide</NoBioReactor>
+  <CarryToBioReactorNew>Transporter {0} vers BioReactor</CarryToBioReactorNew>
+  <CannotCarryThemToBioReactor>Impossible de transporter {0} vers BioReactor</CannotCarryThemToBioReactor>
+  <TheyCannotCarryToBioReactor>{0} ne peut pas être transporté vers BioReactor</TheyCannotCarryToBioReactor>
 </LanguageData>

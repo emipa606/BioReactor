@@ -35,8 +35,23 @@ internal sealed class CompSecondLayer : ThingComp
 
     private CompProperties_SecondLayer Props => (CompProperties_SecondLayer)props;
 
+    public override void DrawAt(Vector3 drawLoc, bool flip = false)
+    {
+        if (((Building_BioReactor)parent).PauseDrawing)
+        {
+            return;
+        }
+
+        base.DrawAt(drawLoc, flip);
+    }
+
     public override void PostDraw()
     {
+        if (((Building_BioReactor)parent).PauseDrawing)
+        {
+            return;
+        }
+
         if (parent.Rotation == Rot4.South)
         {
             Graphic.Draw(

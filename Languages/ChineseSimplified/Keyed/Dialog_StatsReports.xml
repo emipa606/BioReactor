@@ -19,4 +19,8 @@
   <BR.Inventory>库存</BR.Inventory>
   <BR.ShowPawnInfo>典当信息</BR.ShowPawnInfo>
   <BR.ShowPawnInfoDesc>显示所含棋子的信息面板</BR.ShowPawnInfoDesc>
+  <NoBioReactor>无有效 BioReactor</NoBioReactor>
+  <CarryToBioReactorNew>携带 {0} 到 BioReactor</CarryToBioReactorNew>
+  <CannotCarryThemToBioReactor>无法携带 {0} 到生物反应器</CannotCarryThemToBioReactor>
+  <TheyCannotCarryToBioReactor>{0} 无法携带至生物反应器</TheyCannotCarryToBioReactor>
 </LanguageData>

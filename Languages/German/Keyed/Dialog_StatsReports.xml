@@ -19,4 +19,8 @@
   <BR.Inventory>Bestandsaufnahme</BR.Inventory>
   <BR.ShowPawnInfo>Pfand Info</BR.ShowPawnInfo>
   <BR.ShowPawnInfoDesc>Infotafel für die enthaltene Spielfigur anzeigen</BR.ShowPawnInfoDesc>
+  <NoBioReactor>Keine gültige BioReactor</NoBioReactor>
+  <CarryToBioReactorNew>Übertragen {0} nach BioReactor</CarryToBioReactorNew>
+  <CannotCarryThemToBioReactor>Kann {0} nicht zu BioReactor übertragen</CannotCarryThemToBioReactor>
+  <TheyCannotCarryToBioReactor>{0} kann nicht nach BioReactor übertragen</TheyCannotCarryToBioReactor>
 </LanguageData>

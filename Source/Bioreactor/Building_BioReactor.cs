@@ -34,6 +34,8 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
     /// </summary>
     private Vector3 innerDrawOffset;
 
+    public bool PauseDrawing;
+
     public ReactorState state = ReactorState.Empty;
     private Vector3 waterDrawCenter;
     private Vector2 waterDrawSize;
@@ -131,6 +133,18 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         }
 
         return true;
+    }
+
+    public override void PreSwapMap()
+    {
+        base.PreSwapMap();
+        PauseDrawing = true;
+    }
+
+    public override void PostSwapMap()
+    {
+        base.PostSwapMap();
+        PauseDrawing = false;
     }
 
     public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn)
@@ -323,11 +337,14 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         GenPlace.TryPlaceThing(thing, Position, Find.CurrentMap, ThingPlaceMode.Near);
     }
 
-    public static Building_BioReactor FindBioReactorFor(Pawn p, Pawn traveler, bool ignoreOtherReservations = false)
+    public static Building_BioReactor FindBioReactorFor(Pawn p, Pawn traveler, out bool reactorExists,
+        bool ignoreOtherReservations = false)
     {
         var enumerable = from def in DefDatabase<ThingDef>.AllDefs
             where typeof(Building_BioReactor).IsAssignableFrom(def.thingClass)
             select def;
+
+        reactorExists = p.Map.listerBuildings.AllBuildingsColonistOfClass<Building_BioReactor>().Any();
 
         foreach (var singleDef in enumerable)
         {
@@ -413,6 +430,11 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     protected override void DrawAt(Vector3 drawLoc, bool flip = false)
     {
+        if (PauseDrawing)
+        {
+            return;
+        }
+
         /*
          * 상태별 그래픽 UI 드로우
          *
@@ -486,6 +508,11 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     public override void Print(SectionLayer layer)
     {
+        if (PauseDrawing)
+        {
+            return;
+        }
+
         //this.Graphic.Print(layer, this);
         Printer_Plane.PrintPlane(layer, GenThing.TrueCenter(Position, Rot4.South, def.size, 11.7f), Graphic.drawSize,
             Graphic.MatSingle);
