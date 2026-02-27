@@ -44,7 +44,7 @@ public static class RefuelWorkGiverUtility
             return false;
         }
 
-        if (!t.TryGetComp<CompBioRefuelable>().Props.atomicFueling || FindAllFuel(pawn, t) != null)
+        if (!t.TryGetComp<CompBioRefuelable>().Props.atomicFueling || findAllFuel(pawn, t) != null)
         {
             return true;
         }
@@ -63,7 +63,7 @@ public static class RefuelWorkGiverUtility
             return new Job(customRefuelJob ?? JobDefOf.Refuel, t, t2);
         }
 
-        var source = FindAllFuel(pawn, t);
+        var source = findAllFuel(pawn, t);
         var job = new Job(customAtomicRefuelJob ?? JobDefOf.RefuelAtomic, t)
         {
             targetQueueB = (from f in source
@@ -78,18 +78,18 @@ public static class RefuelWorkGiverUtility
         var position = pawn.Position;
         var map = pawn.Map;
         var bestThingRequest = filter.BestThingRequest;
-        var peMode = PathEndMode.ClosestTouch;
+        const PathEndMode peMode = PathEndMode.ClosestTouch;
         var traverseParams = TraverseParms.For(pawn);
         return GenClosest.ClosestThingReachable(position, map, bestThingRequest, peMode, traverseParams, 9999f,
-            Predicate);
+            predicate);
 
-        bool Predicate(Thing x)
+        bool predicate(Thing x)
         {
             return !x.IsForbidden(pawn) && pawn.CanReserve(x) && filter.Allows(x);
         }
     }
 
-    private static List<Thing> FindAllFuel(Pawn pawn, Thing refuelable)
+    private static List<Thing> findAllFuel(Pawn pawn, Thing refuelable)
     {
         var quantity = refuelable.TryGetComp<CompBioRefuelable>().GetFuelCountToFullyRefuel();
         var filter = refuelable.TryGetComp<CompBioRefuelable>().FuelFilter;
@@ -99,15 +99,15 @@ public static class RefuelWorkGiverUtility
         var chosenThings = new List<Thing>();
         var accumulatedQuantity = 0;
 
-        RegionTraverser.BreadthFirstTraverse(region, EntryCondition, RegionProcessor, 99999);
+        RegionTraverser.BreadthFirstTraverse(region, entryCondition, regionProcessor, 99999);
         return accumulatedQuantity >= quantity ? chosenThings : null;
 
-        bool RegionProcessor(Region r)
+        bool regionProcessor(Region r)
         {
             var list = r.ListerThings.ThingsMatching(ThingRequest.ForGroup(ThingRequestGroup.HaulableEver));
             foreach (var thing in list)
             {
-                if (!Validator(thing))
+                if (!validator(thing))
                 {
                     continue;
                 }
@@ -133,12 +133,12 @@ public static class RefuelWorkGiverUtility
             return false;
         }
 
-        bool EntryCondition(Region from, Region r)
+        bool entryCondition(Region from, Region r)
         {
             return r.Allows(traverseParams, false);
         }
 
-        bool Validator(Thing x)
+        bool validator(Thing x)
         {
             return !x.IsForbidden(pawn) && pawn.CanReserve(x) && filter.Allows(x);
         }

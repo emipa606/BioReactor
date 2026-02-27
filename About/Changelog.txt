@@ -1,5 +1,9 @@
 # Changelog for BioReactor
 
+1.6.2 - Pawns should now respect the fuelfilters for the reactors
+Used DeepL to update translations for Japanese
+
+
 1.6.1 - Fixed righclick menu
 Used DeepL to update translations for ChineseSimplified, French, German, Japanese
 

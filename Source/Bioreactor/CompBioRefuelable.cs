@@ -1,10 +1,22 @@
-﻿using RimWorld;
+﻿using System.Reflection;
+using RimWorld;
 using Verse;
 
 namespace BioReactor;
 
 public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 {
+    private static readonly PropertyInfo BaseFuelFilterProperty = typeof(CompRefuelable)
+        .GetProperty("FuelFilter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+    private static readonly FieldInfo BaseFuelFilterField = typeof(CompRefuelable)
+                                                                .GetField("fuelFilter",
+                                                                    BindingFlags.Instance | BindingFlags.Public |
+                                                                    BindingFlags.NonPublic) ??
+                                                            typeof(CompRefuelable).GetField("allowedFuelFilter",
+                                                                BindingFlags.Instance | BindingFlags.Public |
+                                                                BindingFlags.NonPublic);
+
     private Building_BioReactor bioReactor;
     private CompFlickable flickComp;
     public StorageSettings inputSettings;
@@ -42,6 +54,8 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
             }
         }
 
+        syncFuelFilter();
+
         bioReactor = (Building_BioReactor)parent;
 
         var component = parent.Map.GetComponent<CompMapRefuelable>();
@@ -74,5 +88,33 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 
     public override void PostDestroy(DestroyMode mode, Map previousMap)
     {
+    }
+
+    private void syncFuelFilter()
+    {
+        inputSettings ??= new StorageSettings(this);
+
+        var baseFilter = getBaseFuelFilter();
+        if (baseFilter == null)
+        {
+            return;
+        }
+
+        if (inputSettings.filter != baseFilter && inputSettings.filter != null)
+        {
+            baseFilter.CopyAllowancesFrom(inputSettings.filter);
+        }
+
+        inputSettings.filter = baseFilter;
+    }
+
+    private ThingFilter getBaseFuelFilter()
+    {
+        if (BaseFuelFilterProperty != null)
+        {
+            return BaseFuelFilterProperty.GetValue(this) as ThingFilter;
+        }
+
+        return BaseFuelFilterField?.GetValue(this) as ThingFilter;
     }
 }

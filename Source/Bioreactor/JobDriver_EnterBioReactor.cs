@@ -35,21 +35,21 @@ public class JobDriver_EnterBioReactor : JobDriver
                 if (freeColonistsSpawnedOrInPlayerEjectablePodsCount <= 1)
                 {
                     Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
-                        "CasketWarning".Translate(actor.Named("PAWN")).AdjustedFor(actor), Action));
+                        "CasketWarning".Translate(actor.Named("PAWN")).AdjustedFor(actor), action));
                 }
                 else
                 {
-                    Action();
+                    action();
                 }
             }
             else
             {
-                Action();
+                action();
             }
 
             return;
 
-            void Action()
+            void action()
             {
                 actor.DeSpawn();
                 pod.TryAcceptThing(actor);

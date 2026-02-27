@@ -221,7 +221,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             };
         }
 
-        foreach (var gizmo2 in CopyPasteGizmosFor(compRefuelable.inputSettings))
+        foreach (var gizmo2 in copyPasteGizmosFor(compRefuelable.inputSettings))
         {
             yield return gizmo2;
         }
@@ -229,7 +229,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     public override void EjectContents()
     {
-        var filth_Slime = ThingDefOf.Filth_Slime;
+        var filthSlime = ThingDefOf.Filth_Slime;
         foreach (var thing in innerContainer)
         {
             if (thing is not Pawn pawn)
@@ -238,7 +238,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             }
 
             PawnComponentsUtility.AddComponentsForSpawn(pawn);
-            pawn.filth.GainFilth(filth_Slime);
+            pawn.filth.GainFilth(filthSlime);
             if (pawn.RaceProps.IsFlesh)
             {
                 pawn.health.AddHediff(HediffDefOf.CryptosleepSickness);
@@ -297,12 +297,9 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         try
         {
             var compRottable = ContainedThing.TryGetComp<CompRottable>();
-            if (compRottable != null)
-            {
-                compRottable.RotProgress += 600000f;
-            }
+            compRottable?.RotProgress += 600000f;
 
-            MakeFuel();
+            makeFuel();
         }
         catch (Exception ee)
         {
@@ -329,7 +326,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         }
     }
 
-    private void MakeFuel()
+    private void makeFuel()
     {
         var stuff = GenStuff.RandomStuffFor(ThingDefOf.Chemfuel);
         var thing = ThingMaker.MakeThing(ThingDefOf.Chemfuel, stuff);
@@ -451,7 +448,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                         continue;
                     }
 
-                    DrawInnerThing(pawn, DrawPos + innerDrawOffset);
+                    drawInnerThing(pawn, DrawPos + innerDrawOffset);
                     LiquidDraw(new Color32(123, 255, 233, 75), fillpct);
                 }
 
@@ -464,7 +461,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                         continue;
                     }
 
-                    DrawInnerThing(pawn, DrawPos + innerDrawOffset);
+                    drawInnerThing(pawn, DrawPos + innerDrawOffset);
                     LiquidDraw(new Color32(123, 255, 233, 75), 1);
                 }
 
@@ -477,7 +474,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                         continue;
                     }
 
-                    DrawInnerThing(pawn, DrawPos + innerDrawOffset);
+                    drawInnerThing(pawn, DrawPos + innerDrawOffset);
                     LiquidDraw(
                         new Color(0.48f + (0.2f * histolysisPct), 1 - (0.7f * histolysisPct),
                             0.9f - (0.6f * histolysisPct), 0.3f + (histolysisPct * 0.55f)), 1);
@@ -533,13 +530,13 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         GenDraw.DrawFillableBar(r);
     }
 
-    private void DrawInnerThing(Pawn pawn, Vector3 rootLoc)
+    private static void drawInnerThing(Pawn pawn, Vector3 rootLoc)
     {
         pawn.Drawer.renderer.wiggler.downedAngle = 0;
         pawn.Drawer.renderer.RenderPawnAt(rootLoc, Rot4.South);
     }
 
-    private static IEnumerable<Gizmo> CopyPasteGizmosFor(StorageSettings s)
+    private static IEnumerable<Gizmo> copyPasteGizmosFor(StorageSettings s)
     {
         yield return new Command_Action
         {
@@ -549,11 +546,11 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             action = delegate
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                Copy(s);
+                copy(s);
             },
             hotKey = KeyBindingDefOf.Misc4
         };
-        var command_Action = new Command_Action
+        var commandAction = new Command_Action
         {
             icon = ContentFinder<Texture2D>.Get("UI/Commands/PasteSettings"),
             defaultLabel = "CommandPasteBioReactorSettingsLabel".Translate(),
@@ -561,25 +558,25 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             action = delegate
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                PasteInto(s);
+                pasteInto(s);
             },
             hotKey = KeyBindingDefOf.Misc5
         };
         if (!HasCopiedSettings)
         {
-            command_Action.Disable();
+            commandAction.Disable();
         }
 
-        yield return command_Action;
+        yield return commandAction;
     }
 
-    private static void Copy(StorageSettings s)
+    private static void copy(StorageSettings s)
     {
         clipboard.CopyFrom(s);
         HasCopiedSettings = true;
     }
 
-    private static void PasteInto(StorageSettings s)
+    private static void pasteInto(StorageSettings s)
     {
         s.CopyFrom(clipboard);
     }
