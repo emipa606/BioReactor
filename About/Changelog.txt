@@ -1,5 +1,8 @@
 # Changelog for BioReactor
 
+1.6.3 - Bioreactors should now respect the defined fuel-filter
+
+
 1.6.2 - Pawns should now respect the fuelfilters for the reactors
 Used DeepL to update translations for Japanese
 

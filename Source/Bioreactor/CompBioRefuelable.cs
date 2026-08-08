@@ -6,17 +6,6 @@ namespace BioReactor;
 
 public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 {
-    private static readonly PropertyInfo BaseFuelFilterProperty = typeof(CompRefuelable)
-        .GetProperty("FuelFilter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-    private static readonly FieldInfo BaseFuelFilterField = typeof(CompRefuelable)
-                                                                .GetField("fuelFilter",
-                                                                    BindingFlags.Instance | BindingFlags.Public |
-                                                                    BindingFlags.NonPublic) ??
-                                                            typeof(CompRefuelable).GetField("allowedFuelFilter",
-                                                                BindingFlags.Instance | BindingFlags.Public |
-                                                                BindingFlags.NonPublic);
-
     private Building_BioReactor bioReactor;
     private CompFlickable flickComp;
     public StorageSettings inputSettings;
@@ -43,8 +32,20 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 
     public override void PostSpawnSetup(bool respawningAfterLoad)
     {
+        // Clone Props so each building instance has its own CompProperties_Refuelable.
+        // Without this, Props.fuelFilter is the shared def-level object, meaning both
+        // vanilla WorkGiver_Refuel (which reads Props.fuelFilter directly) and vanilla
+        // RefuelWorkGiverUtility ignore any per-building filter set in the ITab.
+        if (parent.def.comps.Contains(props))
+        {
+            var cloneMethod = typeof(object).GetMethod("MemberwiseClone",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            props = (CompProperties_Refuelable)cloneMethod?.Invoke(props, null);
+        }
+
         base.PostSpawnSetup(respawningAfterLoad);
         flickComp = parent.GetComp<CompFlickable>();
+
         if (inputSettings == null)
         {
             inputSettings = new StorageSettings(this);
@@ -54,7 +55,9 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
             }
         }
 
-        syncFuelFilter();
+        // Point Props.fuelFilter at the per-instance filter so all paths
+        // (vanilla and custom) read the same object the ITab writes to.
+        Props.fuelFilter = inputSettings.filter;
 
         bioReactor = (Building_BioReactor)parent;
 
@@ -88,33 +91,5 @@ public class CompBioRefuelable : CompRefuelable, IStoreSettingsParent
 
     public override void PostDestroy(DestroyMode mode, Map previousMap)
     {
-    }
-
-    private void syncFuelFilter()
-    {
-        inputSettings ??= new StorageSettings(this);
-
-        var baseFilter = getBaseFuelFilter();
-        if (baseFilter == null)
-        {
-            return;
-        }
-
-        if (inputSettings.filter != baseFilter && inputSettings.filter != null)
-        {
-            baseFilter.CopyAllowancesFrom(inputSettings.filter);
-        }
-
-        inputSettings.filter = baseFilter;
-    }
-
-    private ThingFilter getBaseFuelFilter()
-    {
-        if (BaseFuelFilterProperty != null)
-        {
-            return BaseFuelFilterProperty.GetValue(this) as ThingFilter;
-        }
-
-        return BaseFuelFilterField?.GetValue(this) as ThingFilter;
     }
 }

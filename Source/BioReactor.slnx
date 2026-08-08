@@ -16,4 +16,7 @@
   <Folder Name="/XML/1.6/Patches/">
     <File Path="../1.6/Patches/VPNE.xml" />
   </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Dialog_StatsReports.xml" />
+  </Folder>
 </Solution>
