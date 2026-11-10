@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputPath>..\..\1.5\Assemblies</OutputPath>
-    <TargetFramework>net481</TargetFramework>
+    <OutputPath>..\..\1.6\Assemblies</OutputPath>
+    <TargetFramework>net48</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.5.12</FileVersion>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <FileVersion>1.6.4</FileVersion>
+    <Copyright>© NukaFrog 2026 - MIT License</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
@@ -15,13 +15,9 @@
       <ExcludeAssets>runtime</ExcludeAssets>
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Lib.Harmony">
-      <Version>*</Version>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
     <PackageReference Include="Mlie_Rimworld_VersionFromManifest" Version="*" />
     <Reference Include="PipeNetwork">
-      <HintPath>..\..\..\..\..\..\workshop\content\294100\2023507013\1.5\Assemblies\PipeSystem.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\2023507013\1.6\Assemblies\PipeSystem.dll</HintPath>
       <CopyLocal>False</CopyLocal>
       <Private>false</Private>
     </Reference>

@@ -18,7 +18,7 @@ internal class BioReactorSettings : ModSettings
     {
         base.ExposeData();
         Scribe_Values.Look(ref Carried, "Carried", true);
-        Scribe_Values.Look(ref Apparel, "Apparel", Apparel);
-        Scribe_Values.Look(ref Inventory, "Inventory", Inventory);
+        Scribe_Values.Look(ref Apparel, "Apparel", true);
+        Scribe_Values.Look(ref Inventory, "Inventory", true);
     }
 }

@@ -1,70 +1,135 @@
-# GitHub Copilot Instructions for BioReactor (Continued)
+# GitHub Copilot Instructions for BioReactor (Continued) Mod
+
+This repository contains the source code for the BioReactor (Continued) mod for RimWorld. This mod is an update of the NukaFrogs mod and adds several new features and systems to enhance the gameplay experience.
 
 ## Mod Overview and Purpose
 
-**Mod Name**: BioReactor (Continued)  
-**Author**: NukaFrog  
-**PackageId**: Mlie.BioReactor  
-
-The BioReactor mod for RimWorld enables colonies to generate electrical power by storing living beings in a bioreactor. The mod enhances sustainability by utilizing food types as fuel and allowing living creatures to be preserved while contributing to power generation.
+The BioReactor (Continued) mod aims to introduce a new energy production system to RimWorld. The mod allows players to produce electricity using living things as fuel, providing a unique and innovative way to power their colonies.
 
 ## Key Features and Systems
 
-1. **Living Battery - BioReactor**: 
-   - Produces electricity from living things.
-   - Utilizes food types (default: raw food) as fuel.
-   - Optionally converts the storage being into chemfuel.
-   - Preserves stored creatures semi-permanently, akin to a crypto casket.
+### Living Battery - BioReactor
 
-2. **Storable Entities**: 
-   - Capable of storing any entity that can move.
-   - Storage capacity is limited to one entity.
+- **Energy Production**: The BioReactor produces electricity from living things, using food as fuel.
+- **Storage Thing**: Living things can be stored semi-permanently, similar to crypto caskets.
+- **Power Generation**: Power production is calculated based on the body size and race of the living thing.
+- **Fuel Type**: The default fuel type is raw food, but it can be customized through mod settings.
+- **Research Prerequisite**: The BiofuelRefining research is required to unlock the BioReactor.
 
-3. **Power Generation Mechanism**:
-   - Computed as Basic Power x Body Size Multiplier x Race Multiplier.
-   - Basic power generation ranges from 1000/1200/1400 based on reactor size (2x2/3x3/4x4).
-   - Body size and race type affect power output (HumanLike: 100%, NonHumanLike: 50%, NonBioType: 0%).
+### Mod Settings
 
-4. **Research Requirement**:
-   - Requires completing BiofuelRefining research to gain access.
-
-5. **User Interaction**:
-   - Colonists can be directed to store entities manually.
-   - Entities can be instructed to carry unconscious beings to the reactor.
-
-6. **Compatibility Enhancements**:
-   - Mod settings allow users to customize dropped items when pawns enter the reactor.
-   - Compatibility with Vanilla Nutrient Paste Expanded and Alien mods.
+- **Fuel Selection**: Players can customize which items are used as fuel for the BioReactor.
+- **Compatibility**: The mod is compatible with Vanilla Nutrient Paste Expanded and Alien mods.
 
 ## Coding Patterns and Conventions
 
-- Adheres to C# coding conventions prevalent in RimWorld mods.
-- Structuring code in components, ensuring encapsulation and separation of concerns.
-- Follows naming conventions that align types with their conceptual function (e.g., `BioReactorSettings`, `BioReactorDef`).
+- **C#**: The mod is written in C# and follows the standard RimWorld coding conventions.
+- **Harmony Patching**: The mod uses Harmony patching to modify existing RimWorld code.
+- **XML Integration**: XML files are used to define new game elements such as buildings, job definitions, and thoughts.
 
 ## XML Integration
 
-- **Def Files**: Defined in XML to integrate with RimWorld.
-  - `Buildings_Power.xml`, `SoundDef.xml`, etc., are used to define building behaviors, job definitions, sound settings, etc.
+The BioReactor mod uses XML files to define new game elements. The following are the key XML files used in the mod:
+
+- `Buildings_Power.xml`: Defines new building types and job definitions.
+- `SoundDef.xml`: Defines new sound effects.
+- `VPNE.xml`: Contains Harmony patches for compatibility with Vanilla Nutrient Paste Expanded.
+- `About.xml`: Contains metadata about the mod, including dependencies.
 
 ## Harmony Patching
 
-- Uses Harmony (`brrainz.harmony`) to inject code into existing methods for enhanced mod functionality.
-- `BioReactorPatches.cs` contains the necessary Harmony patches to extend or modify game behavior relevant to the bioreactor mechanics.
+The BioReactor mod uses Harmony patching to modify existing RimWorld code. Harmony is a powerful tool for modders to hook into and modify game behavior without altering the original source code. The following are the main Harmony patches used in the mod:
+
+- **Building_BioReactor_VNPE.cs**: Contains patches to integrate the BioReactor with Vanilla Nutrient Paste Expanded.
+- **Bio_JobDefOf.cs**: Contains patches to define new job definitions for the BioReactor.
 
 ## Suggestions for Copilot
 
-- **Intelligent Suggestions**: Leverage Copilot to develop complex calculations for power output and additions to logic that handles interactions with other mods.
-- **Code Optimization**: Utilize Copilot to refactor and optimize existing code, especially around computational loops and data-handling methods.
-- **Error Handling**: Prompt Copilot to suggest robust error-checking mechanisms for user inputs and mod interaction.
-- **Compatibility Checks**: Use Copilot for creating condition checks and modular code to ensure broad compatibility with other RimWorld mods.
-- **UI Enhancements**: Encourage Copilot to propose enhancements to the user interface for a smoother user experience, such as better interaction prompts for storing entities in the reactor.
+1. **C# Files**: When writing C# files, consider the following patterns:
+   - Use `Building_` prefix for building-related classes.
+   - Use `ThoughtDef` suffix for thought-related classes.
+   - Use `JobDef` suffix for job-related classes.
+   - Use `Def` suffix for definition-related classes.
+   - Use `Mod` suffix for mod-related classes.
 
----
+2. **XML Files**: When writing XML files, consider the following patterns:
+   - Use `Def` suffix for definition-related elements.
+   - Use `ThingDef` for defining new game elements.
+   - Use `JobDef` for defining new job definitions.
+   - Use `ThoughtDef` for defining new thoughts.
 
-Ensure to activate and test this mod in a controlled environment, without other mods initially, to avoid discords in behavior and compatibility. For error reporting, use the provided Discord channel and adhere to the suggestion guidelines for effective problem resolution.
+3. **Harmony Patching**: When writing Harmony patches, consider the following patterns:
+   - Use `Postfix` and `Prefix` attributes for modifying method behavior.
+   - Use `Transpiler` attribute for modifying method IL code.
+   - Use `StaticConstructorOnStartup` attribute for executing code at startup.
 
-For any code contributions or bug-fixes, use RimSort to organize your mods and post solutions directly to the GitHub repository.
+4. **Mod Settings**: When implementing mod settings, consider the following patterns:
+   - Use `DoSettingsWindowContents` method for creating settings UI.
+   - Use `Settings` class for storing and managing mod settings.
+
+## Example Code Snippets
+
+Here are some example code snippets that demonstrate the coding patterns and conventions used in the BioReactor mod:
+
+### C# Example
+
+csharp
+using System.Collections.Generic;
+using RimWorld;
+using Verse;
+
+namespace BioReactor
+{
+    public class Building_BioReactor_VNPE : Building_BioReactor
+    {
+        public override void VNPE_Check()
+        {
+            // Check if the BioReactor is compatible with Vanilla Nutrient Paste Expanded
+        }
+    }
+}
+
+
+### XML Example
+
+xml
+<Defs>
+    <ThingDef>
+        <defName>Building_BioReactor</defName>
+        <label>BioReactor</label>
+        <description>A device that produces electricity from living things.</description>
+        <thingClass>Building_BioReactor</thingClass>
+        <statBases>
+            <PowerOutput>1000</PowerOutput>
+        </statBases>
+    </ThingDef>
+</Defs>
+
+
+### Harmony Patch Example
+
+csharp
+using HarmonyLib;
+using RimWorld;
+using Verse;
+
+namespace BioReactor
+{
+    [HarmonyPatch(typeof(Building_BioReactor), "SomeMethod")]
+    public static class Building_BioReactor_Patch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Building_BioReactor __instance)
+        {
+            // Postfix code to modify the original method behavior
+        }
+    }
+}
+
+
+## Conclusion
+
+The BioReactor (Continued) mod is a powerful and innovative addition to the RimWorld modding community. By following the coding patterns and conventions outlined in this document, you can help ensure that your contributions to the mod are consistent and maintainable.
 
 ## Project Solution Guidelines
 - Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
@@ -78,4 +143,6 @@ For any code contributions or bug-fixes, use RimSort to organize your mods and p
 ## Hard rules (must follow)
 - Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
 - Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+- When mentioning SonarQube issues, automatically use the SonarQube MCP service to fetch and address issues instead of making inferred fixes without querying SonarQube first.
+- When mentioning the rimworld log, automatically use the Rimworld MCP service to fetch the log.
 

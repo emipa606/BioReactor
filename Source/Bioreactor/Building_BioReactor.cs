@@ -11,7 +11,6 @@ namespace BioReactor;
 
 public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHolder
 {
-    //static Vector3 waterDrawY = new Vector3(0, 0.3f, 0);
     public enum ReactorState
     {
         Empty, //none
@@ -24,6 +23,8 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
     private static readonly StorageSettings clipboard = new();
 
+    public bool PauseDrawing;
+
     private CompBioRefuelable compRefuelable;
     private float fillpct;
     private CompForbiddable forbiddable;
@@ -33,8 +34,6 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
     ///     내부 캐릭터 드로우 좌표. 리액터 실좌표 중심으로 드로우.
     /// </summary>
     private Vector3 innerDrawOffset;
-
-    public bool PauseDrawing;
 
     public ReactorState state = ReactorState.Empty;
     private Vector3 waterDrawCenter;
@@ -147,9 +146,9 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         PauseDrawing = false;
     }
 
-    public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn)
+    public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)
     {
-        foreach (var o in base.GetFloatMenuOptions(myPawn))
+        foreach (var o in base.GetFloatMenuOptions(selPawn))
         {
             yield return o;
         }
@@ -159,7 +158,7 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             yield break;
         }
 
-        if (!myPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly))
+        if (!selPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly))
         {
             var failer = new FloatMenuOption("CannotUseNoPath".Translate(), null);
             yield return failer;
@@ -172,10 +171,10 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             void JobAction()
             {
                 var job = new Job(jobDef, this);
-                myPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
 
-            yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(jobStr, JobAction), myPawn,
+            yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(jobStr, JobAction), selPawn,
                 this);
         }
     }
@@ -189,23 +188,20 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
 
         if (HasAnyContents && ContainedThing is Pawn pawn)
         {
-            if (pawn.RaceProps.FleshType == FleshTypeDefOf.Normal ||
-                pawn.RaceProps.FleshType == FleshTypeDefOf.Insectoid)
+            if ((pawn.RaceProps.FleshType == FleshTypeDefOf.Normal ||
+                 pawn.RaceProps.FleshType == FleshTypeDefOf.Insectoid) && state == ReactorState.Full)
             {
-                if (state == ReactorState.Full)
+                yield return new Command_Action
                 {
-                    yield return new Command_Action
+                    defaultLabel = "Histolysis".Translate(),
+                    defaultDesc = "HistolysisDesc".Translate(),
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Histolysis"),
+                    action = delegate
                     {
-                        defaultLabel = "Histolysis".Translate(),
-                        defaultDesc = "HistolysisDesc".Translate(),
-                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Histolysis"),
-                        action = delegate
-                        {
-                            BioReactorSoundDef.Drowning.PlayOneShot(new TargetInfo(Position, Map));
-                            state = ReactorState.HistolysisStating;
-                        }
-                    };
-                }
+                        BioReactorSoundDef.Drowning.PlayOneShot(new TargetInfo(Position, Map));
+                        state = ReactorState.HistolysisStating;
+                    }
+                };
             }
 
             yield return new Command_Action
@@ -260,14 +256,11 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
         Scribe_Values.Look(ref state, "state");
         Scribe_Values.Look(ref fillpct, "fillpct");
         Scribe_Values.Look(ref histolysisPct, "histolysisPct");
-        if (Scribe.mode == LoadSaveMode.PostLoadInit)
+        if (Scribe.mode == LoadSaveMode.PostLoadInit && def is BioReactorDef reactorDef)
         {
-            if (def is BioReactorDef reactorDef)
-            {
-                innerDrawOffset = reactorDef.innerDrawOffset;
-                waterDrawCenter = reactorDef.waterDrawCenter;
-                waterDrawSize = reactorDef.waterDrawSize;
-            }
+            innerDrawOffset = reactorDef.innerDrawOffset;
+            waterDrawCenter = reactorDef.waterDrawCenter;
+            waterDrawSize = reactorDef.waterDrawSize;
         }
 
         compRefuelable = GetComp<CompBioRefuelable>();
@@ -311,17 +304,17 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             return;
         }
 
-        foreach (var p in Map.mapPawns.SpawnedPawnsInFaction(Faction))
+        foreach (var needs in Map.mapPawns.SpawnedPawnsInFaction(Faction).Select(p => p.needs))
         {
-            if (p.needs?.mood?.thoughts == null)
+            if (needs?.mood?.thoughts == null)
             {
                 continue;
             }
 
-            p.needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef.KnowHistolysisHumanlike);
-            p.needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef
+            needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef.KnowHistolysisHumanlike);
+            needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef
                 .KnowHistolysisHumanlikeCannibal);
-            p.needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef
+            needs.mood.thoughts.memories.TryGainMemory(BioReactorThoughtDef
                 .KnowHistolysisHumanlikePsychopath);
         }
     }
@@ -499,7 +492,6 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
                 break;
         }
 
-        //Graphic.Draw(GenThing.TrueCenter(Position, Rot4.South, def.size, 11.7f), Rot4.South, this, 0f);
         Comps_PostDraw();
     }
 
@@ -510,7 +502,6 @@ public sealed class Building_BioReactor : Building_Casket, ISuspendableThingHold
             return;
         }
 
-        //this.Graphic.Print(layer, this);
         Printer_Plane.PrintPlane(layer, GenThing.TrueCenter(Position, Rot4.South, def.size, 11.7f), Graphic.drawSize,
             Graphic.MatSingle);
     }
